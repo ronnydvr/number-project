@@ -1,0 +1,14 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+# Explicitly include /data in the build
+[[redirects]]
+  from = "/data/*"
+  to = "/data/:splat"
+  status = 200
+  force = true
+
+# For file changes in /data to trigger deploys
+[build.environment]
+  NETLIFY_DEPLOY_REF = "data"
