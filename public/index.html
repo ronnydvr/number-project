@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Price List Debug</title>
+    <title>Coffee Shop Menu</title>
+    <style>
+        body { font-family: Arial; max-width: 600px; margin: 0 auto; padding: 20px; }
+        h1 { color: #6F4E37; text-align: center; }
+        .item { display: flex; justify-content: space-between; margin: 8px 0; }
+        .item-name { font-weight: bold; }
+        .item-price { color: #6F4E37; }
+    </style>
 </head>
 <body>
-  <h1>Debug Mode</h1>
-  <div id="output">Loading...</div>
-  <script>
-    // Try to load prices.json
-    fetch('/data/prices.json')
-      .then(response => {
-        if (!response.ok) throw new Error('File not found');
-        return response.json();
-      })
-      .then(prices => {
-        document.getElementById('output').innerHTML = 
-          `Success!<br>First item: ${Object.keys(prices)[0]} = $${prices.espresso}`;
-      })
-      .catch(err => {
-        document.getElementById('output').innerHTML = 
-          `ERROR: ${err.message}<br>Is prices.json in the /data folder?`;
-      });
-  </script>
-</body>
-</html>
+    <h1>☕ Menu</h1>
+    <div id="menu"></div>
+    <script>
+        fetch('data/prices.json')
+            .then(response => response.json())
+            .then(prices => {
+                let html = '';
+                for (const [item, price] of Object.entries(prices)) {
+                    html += `
+                        <div class="item">
+                            <span class="item-name">${formatName(item)}</span>
+                            <span class="item-price">$${price.toFixed(2)}</span>
+                        </div>
+                    `;
+                }
+                document.getElementById('menu').innerHTML = html;
+            })
+            .catch(err => {
+                console.error("
