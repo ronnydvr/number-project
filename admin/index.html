@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Price List Editor</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    textarea { width: 100%; height: 300px; font-family: monospace; }
+    button { padding: 10px 15px; background: #2ea44f; color: white; border: none; }
+  </style>
+</head>
+<body>
+  <h1>Edit Coffee Shop Prices</h1>
+  <textarea id="priceData"></textarea>
+  <button id="saveBtn">Save Changes</button>
+  <p id="status"></p>
+
+  <script>
+    // Load current prices
+    fetch('/data/prices.json')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('priceData').value = JSON.stringify(data, null, 2);
+      });
+
+    // Save changes
+    document.getElementById('saveBtn').addEventListener('click', async () => {
+      const newData = document.getElementById('priceData').value;
+      try {
+        const response = await fetch('/.netlify/functions/update-prices', {
+          method: 'POST',
+          body: newData,
+          headers: { 'Content-Type': 'application/json' }
+        });
+        document.getElementById('status').textContent = "Success! Changes will update in ~1 minute.";
+      } catch (err) {
+        document.getElementById('status').textContent = "Error: " + err.message;
+      }
+    });
+  </script>
+</body>
+</html>
