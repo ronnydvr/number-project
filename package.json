@@ -1,20 +1,10 @@
-{
-  "name": "number-project",
+{{
+  "name": "coffee-shop-menu",
   "version": "1.0.0",
-  "description": "A simple web page showing numbers 1, 2, 3.",
-  "main": "index.js",
+  "description": "Coffee shop price list",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ronnydvr/number-project.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ronnydvr/number-project/issues"
-  },
-  "homepage": "https://github.com/ronnydvr/number-project#readme"
+    "build": "echo 'No build needed for static site'",
+    "deploy": "git push origin main"
+  }
 }
