@@ -1,0 +1,15 @@
+backend:  
+  name: git-gateway  
+  branch: main  
+  
+media_folder: "public/img"  
+public_folder: "/img"  
+  
+collections:  
+  - name: "prices"  
+    label: "Prices"  
+    file: "public/data/prices.json"  
+    fields:  
+      - {label: "Espresso", name: "espresso", widget: "number"}  
+      - {label: "Latte", name: "latte", widget: "number"}  
+      - {label: "Cappuccino", name: "cappuccino", widget: "number"} 
